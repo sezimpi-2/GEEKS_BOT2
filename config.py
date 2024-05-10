@@ -5,12 +5,12 @@ from os import getenv
 
 load_dotenv()
 bot = Bot(token=getenv("BOT_TOKEN"))
-dp = Dispatcher(bot)
+dp = Dispatcher()
 
 
 async def set_menu():
     await bot.set_my_commands([
         types.BotCommand(command="start", description="Начало"),
-        types.BotCommand(command="picture", description="Картинка")
+        types.BotCommand(command="opros", description="Опрос")
     ])
 

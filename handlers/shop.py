@@ -2,31 +2,33 @@ from aiogram import Router, F, types
 from aiogram.filters import Command
 
 
-menu_router = Router()
+shop_router = Router()
 
 
-@menu_router.message(Command("menu"))
+@shop_router.message(Command("shop"))
 async def show_categories(message: types.Message):
     kb = types.ReplyKeyboardMarkup(
         keyboard=[
             [
-                types.KeyboardButton(text="Виды пиццы"),
-                types.KeyboardButton(text="Напитки")
+                types.KeyboardButton(text="пиццы"),
+                types.KeyboardButton(text="напитки")
             ],
             [
-                types.KeyboardButton(text="Пеперони и кола"),
+                types.KeyboardButton(text="маргарита"),
             ]
         ],
         resize_keyboard=True
     )
-    await message.answer("наше меню:", reply_markup=kb)
+    await message.answer("меню:", reply_markup=kb)
 
 
-@menu_router_router.message(F.text.lower() == "Виды пиццы")
+@shop_router.message(F.text.lower() == "чили")
 async def show_triller(message: types.Message):
-    await message.answer("Пеперони, Чили, Маргарита")
+    kb = types.ReplyKeyboardRemove()
+    await message.answer("пицца маргарита", reply_markup=kb)
 
 
-@menu_router.message(F.text.lower() == "Напитки")
+@shop_router.message(F.text.lower() == "чили")
 async def show_triller(message: types.Message):
-    await message.answer("Напитки:кола, пепси, фанта")
+    kb = types.ReplyKeyboardRemove()
+    await message.answer("пицца чили", reply_markup=kb)
