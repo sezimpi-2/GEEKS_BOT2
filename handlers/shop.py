@@ -17,17 +17,12 @@ async def show_categories(message: types.Message):
         ],
         resize_keyboard=True
     )
-    await message.answer("Виды пиццы по размеру:", reply_markup=kb)
+    await message.answer("пиццы по размеру:", reply_markup=kb)
+types_pizza= ("Диаметр-35см", "Диаметр-30с", "Диаметр-1м")
 
-@shop_router.message(F.text.lower() == "диаметр-25см")
+
+@shop_router.message(F.text.lower().in_(types_pizza))
 async def show_triller(message: types.Message):
-    await message.answer("Пиццы с диаметром 25см")
+    type_pizza = message.text
     kb = types.ReplyKeyboardRemove()
-    await message.answer("Виды пиццы с диаметром 25см", reply_markup=kb)
-
-
-@shop_router.message(F.text.lower() == "Диаметр-30см")
-async def show_triller(message: types.Message):
-    await message.answer("Пиццы с диаметром 30см")
-    kb = types.ReplyKeyboardRemove()
-    await message.answer("Виды пиццы с диаметром 30см", reply_markup=kb)
+    await message.answer(f"Пиццы с диаметром: {type_pizza}", reply_markup=kb)

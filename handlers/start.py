@@ -11,7 +11,7 @@ async def start_cmd(message: types.Message):
     kb = types.InlineKeyboardMarkup(
         inline_keyboard=[
             [
-                types.InlineKeyboardButton(text="Наш сайт", url="https://pizza_sezim.kg"),
+                types.InlineKeyboardButton(text="Наш сайт", url="https://pizza.kg"),
                 types.InlineKeyboardButton(text="Наш инстаграм", url="https://instagram.com/pizza.kg")
             ],
             [
@@ -23,16 +23,16 @@ async def start_cmd(message: types.Message):
         ]
     )
     await message.answer(f"Привет, {message.from_user.first_name}", reply_markup=kb)
-   
+    # await message.reply(f"Привет, {message.from_user.first_name}")
 
 
-@start_router.callback_query(F.data == "about_us") 
+@start_router.callback_query(F.data == "about_us") # lambda query: query.data == "about_us"
 async def about_us(callback: types.CallbackQuery):
     await callback.answer()
     await callback.message.answer("О нас")
 
 
-@start_router.callback_query(F.data == "donate") 
+@start_router.callback_query(F.data == "donate") # lambda query: query.data == "about_us"
 async def about_us(callback: types.CallbackQuery):
     await callback.answer()
     await callback.message.answer("Мы будем рады любой сумме :)")
