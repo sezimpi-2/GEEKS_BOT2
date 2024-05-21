@@ -71,4 +71,10 @@ async def process_rating(message: types.Message, state: FSMContext):
     purity = purity_assessment.index(purity) + 3
     await state.update_data(purity=purity)
     await message.answer("Спасибо за прохождение опроса😊\nМы будем рады встретить вас в нашем заведении ещё раз!💖")
+    data = await state.get_data()
+    print(data)
+    await database.execute(
+        "INSERT INTO surveys (name, age, half, type_pizza, purity) VALUES (?, ?, ?, ?, ?)",
+        (data["name"], data["age"], data["half"], data["type_pizza"], data["purity"]),
+    )
     await state.clear()
