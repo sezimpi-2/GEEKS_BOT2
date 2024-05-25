@@ -19,6 +19,9 @@ async def start_cmd(message: types.Message):
             ],
             [
                 types.InlineKeyboardButton(text="Пожертвуйте нам", callback_data="donate")
+            ],
+            [
+                types.InlineKeyboardButton(text="Ссылки на объявления", callback_data="house.kg")
             ]
         ]
     )
@@ -37,3 +40,7 @@ async def about_us(callback: types.CallbackQuery):
     await callback.answer()
     await callback.message.answer("Мы будем рады любой сумме :)")
 
+@start_router.callback_query(F.data == "house.kg") # lambda query: query.data == "about_us"
+async def about_us(callback: types.CallbackQuery):
+    await callback.answer()
+    await callback.message.answer("House.kg")

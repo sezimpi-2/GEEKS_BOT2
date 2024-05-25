@@ -36,10 +36,10 @@ async def show_triller(message: types.Message):
         await message.answer("К сожалению, ничего не нашлось")
         return
     kb = types.ReplyKeyboardRemove()
-    await message.answer(f"Книги жанра {types_pizza}", reply_markup=kb)
-    await message.answer(f"Книги жанра {types_pizza}:", reply_markup=kb)
-    for book in data:
-        image = types.FSInputFile(pizzas.get("picture"))
+    await message.answer(f"Пиццы {types_pizza}", reply_markup=kb)
+    await message.answer(f"Пиццы {types_pizza}:", reply_markup=kb)
+    for types_pizza in data:
+        image = types.FSInputFile(types_pizza.get("picture"))
         await message.answer_photo(
             photo=image, 
-            caption=f"{book['name']} - {book['author']}\nЦена: {book['price']} сом")
+            caption=f"{types_pizza['name']} - {types_pizza['author']}\nЦена: {types_pizza['price']} сом")
