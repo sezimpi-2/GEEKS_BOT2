@@ -21,7 +21,7 @@ async def start_cmd(message: types.Message):
                 types.InlineKeyboardButton(text="Пожертвуйте нам", callback_data="donate")
             ],
             [
-                types.InlineKeyboardButton(text="Ссылки на объявления", callback_data="house.kg")
+                types.InlineKeyboardButton(text="Ссылки на объявления", callback_data="'get_links')")
             ]
         ]
     )
