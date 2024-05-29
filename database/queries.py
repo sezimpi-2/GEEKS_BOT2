@@ -9,17 +9,6 @@ class Queries:
             purity TEXT
         )
     """
-class Queries:
-    CREATE_SURVEY_TABLE = """
-        CREATE TABLE IF NOT EXISTS surveys (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT,
-            age INTEGER,
-            half TEXT,
-            type_pizza TEXT,
-            purity TEXT
-        )
-    """
     DROP_TYPES_PIZZA_TABLE = "DROP TABLE IF EXISTS types_pizza"
     CREATE_TYPES_PIZZA_TABLE = """
         CREATE TABLE IF NOT EXISTS types_pizza (
@@ -41,9 +30,9 @@ class Queries:
     """
     POPULATE_TYPES_PIZZA = """
         INSERT INTO type_pizza (name) VALUES
-            ('Триллер'),
-            ('Хоррор'),
-            ('Фантастика')
+            ('С сыром'),
+            ('Острые'),
+            ('Без сыра')
     """
     POPULATE_PIZZAS = """
         INSERT INTO pizzas (name, size, price, picture, type_pizza_id) VALUES

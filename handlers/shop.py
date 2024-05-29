@@ -1,5 +1,7 @@
 from aiogram import Router, F, types
 from aiogram.filters import Command
+from config import database
+from pprint import pprint
 
 shop_router = Router()
 
@@ -18,28 +20,27 @@ async def show_categories(message: types.Message):
         resize_keyboard=True
     )
     await message.answer("пиццы по размеру:", reply_markup=kb)
-types_pizza= ("Диаметр-35см", "Диаметр-30с", "Диаметр-1м")
+type_pizza= ("Диаметр-35см", "Диаметр-30с", "Диаметр-1м")
 
-
-@shop_router.message(F.text.lower().in_(types_pizza))
+@shop_router.message(F.text.lower().in_(type_pizza))
 async def show_triller(message: types.Message):
-   types_pizza = message.text
-   print("Пользователь нажал на кнопку", types_pizza)
+   type_pizza = message.text
+   print("Пользователь нажал на кнопку", type_pizza)
    data = await database.fetch(
-        """SELECT * FROM pizzas 
+        """SELECT * FROM pizzas
         INNER JOIN types_pizza ON pizzas.type_pizza_id = types_pizza.id 
         WHERE types_pizza.name = ?""", 
-        (types_pizza,)
+        (type_pizza ,) 
    )
-    print(data)
-    if not data:
+   pprint(data) 
+   if not data:
         await message.answer("К сожалению, ничего не нашлось")
         return
-    kb = types.ReplyKeyboardRemove()
-    await message.answer(f"Пиццы {types_pizza}", reply_markup=kb)
-    await message.answer(f"Пиццы {types_pizza}:", reply_markup=kb)
-    for types_pizza in data:
-        image = types.FSInputFile(types_pizza.get("picture"))
+   kb = types.ReplyKeyboardRemove()
+   await message.answer(f"Пиццы вида {type_pizza}", reply_markup=kb)
+   await message.answer(f"Пиццы вида {type_pizza}:", reply_markup=kb)
+   for pizza in data:
+        image = types.FSInputFile(pizza.get("photo"))
         await message.answer_photo(
             photo=image, 
-            caption=f"{types_pizza['name']} - {types_pizza['author']}\nЦена: {types_pizza['price']} сом")
+            caption=f"{pizza['name']} - {pizza['author']}\nЦена: {pizza['price']} сом")
